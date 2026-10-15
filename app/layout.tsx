@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
@@ -26,6 +25,9 @@ export const metadata: Metadata = {
     '마사지샵 안내',
     '마사지 가격 및 코스',
   ],
+  other: {
+    'naver-site-verification': 'debc1424cd6701453ff1a2784dcfeb3e51b7c3ba',
+  },
   authors: [{ name: '원클릭마사지', url: SITE_URL }],
   creator: '원클릭마사지',
   publisher: '원클릭마사지',
