@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
@@ -13,11 +14,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: '서울 전체 마사지 추천 총정리｜후기 좋은 전국 마사지샵 안내 ｜원클릭마사지',
+    default: '서울 전체 마사지 추천 총정리·후기 좋은 샵 안내｜원클릭마사지',
     template: '%s | 원클릭마사지',
   },
   description:
-    '서울 출장마사지·스웨디시 업체를 원클릭에서 확인하세요. 시·군·구별로 나눠 코스와 이용 요금, 운영 시간을 정리했습니다. 예약은 각 업체에 직접 하시면 됩니다.',
+    '서울 출장마사지·스웨디시 업체를 원클릭에서 확인하세요. 구별 코스, 요금, 운영시간을 투명하게 정리했습니다. 예약은 업체에 직접 하시면 됩니다.',
   keywords: [
     '원클릭마사지',
     '서울 출장마사지',
@@ -36,9 +37,9 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: SITE_URL,
     siteName: '원클릭마사지',
-    title: '서울 전체 마사지 추천 총정리｜후기 좋은 전국 마사지샵 안내 ｜원클릭마사지',
+    title: '서울 전체 마사지 추천 총정리·후기 좋은 샵 안내｜원클릭마사지',
     description:
-      '서울 출장마사지·스웨디시 업체를 원클릭에서 확인하세요. 시·군·구별로 나눠 코스와 이용 요금, 운영 시간을 정리했습니다. 예약은 각 업체에 직접 하시면 됩니다.',
+      '서울 출장마사지·스웨디시 업체를 원클릭에서 확인하세요. 구별 코스, 요금, 운영시간을 투명하게 정리했습니다. 예약은 업체에 직접 하시면 됩니다.',
     images: [
       {
         url: '/logo.png',
