@@ -355,7 +355,7 @@ export default async function RegionalDetailPage({ params }: PageProps) {
           </div>
         </section>
 
-        <ClientTextMixer locationText={`${regionFullName} ${districtName}`} />
+        <ClientTextMixer region={region} district={districtName} />
 
         <article className="bg-[#0e0e12] p-6 sm:p-10 rounded-3xl border border-white/10 space-y-8 text-gray-300 leading-relaxed text-xs sm:text-sm">
           <div className="border-b border-white/10 pb-4">

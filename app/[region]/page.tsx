@@ -79,7 +79,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: { absolute: info.title },
     description: info.desc,
     alternates: { canonical: canonicalUrl },
-    robots: { index: true, follow: true, maxImagePreview: "large" },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
     openGraph: {
       type: "website",
       locale: "ko_KR",
@@ -98,35 +108,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
   };
 }
-
-export default async function RegionPage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const regionKey = resolvedParams.region?.toLowerCase();
-  const info = regionMetaInfo[regionKey];
-  const districts = regionDistricts[regionKey];
-
-  if (!info || !districts) {
-    notFound();
-  }
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: info.title,
-    url: `${SITE_URL}/${regionKey}`,
-    description: info.desc,
-    isPartOf: {
-      "@type": "WebSite",
-      name: "원클릭마사지",
-      url: SITE_URL,
-    },
-    about: {
-      "@type": "Service",
-      name: `${info.name} 출장 프라이빗케어 마사지`,
-      areaServed: info.name,
-      telephone: "0507-1280-3360",
-    },
-  };
 
   return (
     <div className="bg-[#050505] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-20">
