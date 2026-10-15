@@ -10,7 +10,7 @@ interface PageProps {
   }>;
 }
 
-// 권역별 메타데이터 및 타이틀 설정
+// 권역별 메타데이터 및 안내 정보
 const regionMetaInfo: Record<string, { name: string; title: string; desc: string; count: string }> = {
   seoul: {
     name: "서울",
@@ -32,7 +32,7 @@ const regionMetaInfo: Record<string, { name: string; title: string; desc: string
   },
 };
 
-// 권역별 하위 구/시/군 목록 데이터
+// 권역별 하위 시·군·구 목록 데이터
 const regionDistricts: Record<string, { key: string; name: string }[]> = {
   seoul: [
     { key: "dobong", name: "도봉구" }, { key: "dongdaemun", name: "동대문구" }, { key: "dongjak", name: "동작구" },
@@ -102,12 +102,41 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: `${SITE_URL}/banner.jpg`,
           width: 1200,
           height: 630,
-          alt: `${info.name} 출장 프라이빗케어 마사지 - 원클릭마사지`,
+          alt: `${info.name} 출장 마사지 추천 - 원클릭마사지`,
         },
       ],
     },
   };
 }
+
+export default async function RegionPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const regionKey = resolvedParams.region?.toLowerCase();
+  const info = regionMetaInfo[regionKey];
+  const districts = regionDistricts[regionKey];
+
+  if (!info || !districts) {
+    notFound();
+  }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: info.title,
+    url: `${SITE_URL}/${regionKey}`,
+    description: info.desc,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "원클릭마사지",
+      url: SITE_URL,
+    },
+    about: {
+      "@type": "Service",
+      name: `${info.name} 출장 프라이빗케어 마사지`,
+      areaServed: info.name,
+      telephone: "0507-1280-3360",
+    },
+  };
 
   return (
     <div className="bg-[#050505] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-20">
@@ -186,7 +215,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           </div>
         </section>
 
-        {/* 세부 지역(시·군·구 / 자치구) 칩 선택 그리드 섹션 */}
+        {/* 세부 지역 선택 그리드 */}
         <section className="max-w-5xl mx-auto px-4 w-full space-y-6">
           <div className="bg-[#121215] border border-amber-500/30 p-6 md:p-10 rounded-3xl shadow-xl space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-white/10 pb-4">
