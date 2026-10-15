@@ -19,59 +19,59 @@ interface ClientTextMixerProps {
   shops?: ShopItem[];
 }
 
-const SITE_URL = "https://baruncare-seoul.netlify.app";
+const SITE_URL = "https://oneclick-massage.netlify.app";
 
-// 🌟 바른케어 전용 선입금 0원 후불 정찰제 10대 키워드 패턴
+// 🌟 원클릭마사지 전용 마사지샵 안내 키워드 패턴
 const WELLNESS_PATTERNS = [
-  "선입금 없는 출장 안심 마사지 & 바디케어 안내",
-  "100% 현장 후불 출장 타이 마사지 릴렉스 프로그램",
-  "선입금 0원 출장 아로마 마사지 천연 오일 순환 케어",
-  "출장 스웨디시 마사지 & 감성 안심 테라피",
-  "프라이빗 1:1 맞춤형 출장 안심 바디 마사지",
-  "출장 딥티슈 마사지 & 집중 피로회복 솔루션",
-  "출장 림프케어 마사지 & 바디 밸런스 트리트먼트",
-  "출장 건식 릴렉스 마사지 & 전신 스트레칭 정찰제",
-  "출장 안심 케어 마사지 & 투명한 후불 요금 가이드",
-  "출장 나이트 안심 힐링 마사지 & 편안한 이완 케어"
+  "서울 전체 마사지 추천 총정리｜후기 좋은 마사지샵 안내",
+  "스웨디시 및 아로마 마사지 시·군·구별 코스·요금 안내",
+  "프리미엄 감성 마사지 & 힐링 샵 정보 안내",
+  "전국 및 수도권 인기 마사지샵 실시간 가격 비교",
+  "지친 피로를 풀어주는 1:1 맞춤형 마사지 큐레이션",
+  "힐링 테라피 프로그램 및 상세 운영 시간 안내",
+  "숙련된 테라피스트의 품격 있는 바디 릴렉싱 안내",
+  "엄선된 제휴 마사지샵 코스별 요금 및 리뷰 안내",
+  "도심 속 힐링을 위한 전문 마사지샵 정보 총정리",
+  "내 주변 마사지샵 찾기 및 투명한 가격 비교 가이드"
 ];
 
 const defaultShops: ShopItem[] = [
   {
     id: 1,
-    name: "바른안심테라피",
-    desc: "굳은 근육을 부드럽게 이완하는 건식 타이 & 100% 현장 후불제 딥 릴렉스 전문 센터",
+    name: "원클릭안심테라피",
+    desc: "굳은 근육을 부드럽게 이완하는 건식 타이 & 프리미엄 딥 릴렉스 전문 센터",
     phone: "0507-1280-3140",
-    price: "110,000원부터~",
+    price: "90,000원부터~",
     image: "/shop1.jpg"
   },
   {
     id: 2,
-    name: "오늘밤바른케어",
-    desc: "천연 에센셜 오일과 정교한 핸드 테크닉의 프리미엄 아로마 바디 순환 안심 케어",
+    name: "오늘밤원클릭케어",
+    desc: "천연 에센셜 오일과 정교한 핸드 테크닉의 프리미엄 아로마 바디 순환 케어",
     phone: "0507-1280-3199",
     price: "60,000원부터~",
     image: "/shop2.jpg"
   },
   {
     id: 3,
-    name: "주주안심홈타이",
-    desc: "타이와 아로마를 결합한 VIP 시그니처 정찰제 힐링 프로그램",
+    name: "주주원클릭홈타이",
+    desc: "타이와 아로마를 결합한 VIP 시그니처 힐링 프로그램",
     phone: "0507-1280-3197",
     price: "60,000원부터~",
     image: "/shop3.jpg"
   },
   {
     id: 4,
-    name: "골든바른테라피",
-    desc: "선입금 없는 정직한 정찰제 운영과 편안한 힐링을 약속하는 감성 스웨디시",
+    name: "골든원클릭테라피",
+    desc: "정직한 정찰제 운영과 편안한 힐링을 약속하는 감성 스웨디시",
     phone: "0507-1280-3360",
     price: "60,000원부터~",
     image: "/shop4.jpg"
   },
   {
     id: 5,
-    name: "퀸즈바른홈케어",
-    desc: "전문 테라피스트들의 1:1 맞춤형 VIP 피로회복 웰니스 안심 후불 케어",
+    name: "퀸즈원클릭홈케어",
+    desc: "전문 테라피스트들의 1:1 맞춤형 VIP 피로회복 웰니스 케어",
     phone: "0507-1280-3296",
     price: "60,000원부터~",
     image: "/shop5.jpg"
@@ -87,7 +87,7 @@ export default function ClientTextMixer({
   const locationText = dongName ? `${district} ${dongName}`.trim() : `${district}`.trim();
 
   const introText = useMemo(() => {
-    if (!locationText) return `선입금 없는 출장 안심 마사지 & 바디케어 안내`;
+    if (!locationText) return `서울 전체 마사지 추천 총정리｜후기 좋은 마사지샵 안내`;
     const index =
       Math.abs(
         locationText
@@ -97,7 +97,7 @@ export default function ClientTextMixer({
     return `${locationText} ${WELLNESS_PATTERNS[index]}`;
   }, [locationText]);
 
-  // 🌟 네이버 서치어드바이저 수집 봇과 구글 검색엔진을 위한 ItemList + HealthAndBeautyBusiness 정형 데이터
+  // 🌟 검색엔진을 위한 ItemList + HealthAndBeautyBusiness 정형 데이터
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -129,7 +129,7 @@ export default function ClientTextMixer({
           ✨ {introText}
         </p>
         <p className="text-[11px] text-gray-400 mt-1">
-          {locationText} 출장 마사지 선입금 없는 100% 현장 후불제 추천 코스를 바른케어에서 편리하게 확인하세요.
+          {locationText} 마사지·스웨디시 업체를 원클릭에서 확인하세요. 시·군·구별 코스와 이용 요금을 정리했습니다. 예약은 각 업체에 직접 하시면 됩니다.
         </p>
       </div>
 
@@ -137,9 +137,9 @@ export default function ClientTextMixer({
       <section className="space-y-4">
         <div className="flex justify-between items-center">
           <h2 className="text-sm font-black text-amber-400 tracking-wider uppercase">
-            🏆 {locationText} 안심 후불 추천 제휴점
+            🏆 {locationText} 추천 제휴 마사지샵
           </h2>
-          <span className="text-[11px] text-gray-500">선입금 0원 정찰제 제휴 센터</span>
+          <span className="text-[11px] text-gray-500">원클릭마사지 제휴 센터</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -161,7 +161,7 @@ export default function ClientTextMixer({
                 >
                   <img
                     src={shop.image}
-                    alt={`${locationText} 출장 마사지 - ${shop.name}`}
+                    alt={`${locationText} 마사지 - ${shop.name}`}
                     width={96}
                     height={96}
                     loading="lazy"

@@ -1,18 +1,17 @@
 // app/sitemap.ts
 import { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://baruncare-seoul.netlify.app';
+const BASE_URL = 'https://oneclick-massage.netlify.app';
 
-// 사이트맵의 lastModified는 매 요청마다 new Date()를 찍지 않고,
-// 사이트 배포 또는 실제 콘텐츠 업데이트 시점의 날짜로 고정해야 네이버 봇이 신뢰합니다.
-const LAST_MODIFIED_DATE = new Date('2026-10-14T00:00:00+09:00');
+// 사이트 배포 및 콘텐츠 업데이트 시점 고정 날짜 (네이버/구글 색인 신뢰도용)
+const LAST_MODIFIED_DATE = new Date('2026-10-15T00:00:00+09:00');
 
 const regionData: Record<
   string,
   { name: string; districts: Record<string, { name: string; dongs: string[] }> }
 > = {
   seoul: {
-    name: '서울특별시',
+    name: '서울',
     districts: {
       jongno: { name: '종로구', dongs: ['청운동', '효자동', '사직동', '삼청동', '부암동', '평창동', '무악동', '교남동', '가회동', '종로1.2.3.4가동', '종로5.6가동', '이화동', '혜화동', '창신1동', '창신2동', '창신3동', '숭인1동', '숭인2동'] },
       jung: { name: '중구', dongs: ['소공동', '회현동', '명동', '필동', '장충동', '광희동', '을지로동', '신당동', '다산동', '약수동', '청구동', '동화동', '황학동', '중림동'] },
@@ -42,7 +41,7 @@ const regionData: Record<
     },
   },
   gyeonggi: {
-    name: '경기도',
+    name: '경기',
     districts: {
       suwon_jangan: { name: '수원시 장안구', dongs: ['파장동', '정자1동', '정자2동', '정자3동', '영화동', '송죽동', '조원1동', '조원2동', '율천동'] },
       suwon_gwonseon: { name: '수원시 권선구', dongs: ['세류1동', '세류2동', '세류3동', '권선1동', '권선2동', '곡선동', '평동', '호매실동', '서둔동', '금곡동'] },
@@ -91,7 +90,7 @@ const regionData: Record<
     },
   },
   incheon: {
-    name: '인천광역시',
+    name: '인천',
     districts: {
       jemulpo: { name: '제물포구', dongs: ['신포동', '연안동', '신흥동', '도원동', '율목동', '동인천동', '개항동', '만석동', '화수동', '송현동', '송림동', '금창동'] },
       yeongjong: { name: '영종구', dongs: ['영종동', '영종1동', '영종2동', '운서동', '용유동', '중산동', '운남동', '운북동'] },
@@ -109,7 +108,7 @@ const regionData: Record<
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // 1. 메인 홈 (가장 높은 수집 우선순위)
+  // 1. 메인 홈페이지
   const mainRoute: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
@@ -119,32 +118,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // 2. 상단 고정 카테고리 페이지
-  const categoryRoutes: MetadataRoute.Sitemap = [
-    'services',
-    'prices',
-    'travel',
-    'places',
-    'reviews',
-  ].map((route) => ({
-    url: `${BASE_URL}/${route}`,
+  // 2. 서울, 경기, 인천 단독 권역 페이지 (/seoul, /gyeonggi, /incheon)
+  const singleRegionRoutes: MetadataRoute.Sitemap = ['seoul', 'gyeonggi', 'incheon'].map((regionKey) => ({
+    url: `${BASE_URL}/${regionKey}`,
     lastModified: LAST_MODIFIED_DATE,
-    changeFrequency: 'weekly',
-    priority: 0.8,
+    changeFrequency: 'daily',
+    priority: 0.9,
   }));
 
-  // 3. 지역(시/도 메인, 구/시/군, 세부 동) 라우트
+  // 3. 지역(구/시/군 및 세부 동) 라우트
   const regionRoutes: MetadataRoute.Sitemap = [];
 
   for (const [regionKey, regionVal] of Object.entries(regionData)) {
-    // 시/도 메인 경로 (예: /seoul/서울특별시)
-    regionRoutes.push({
-      url: `${BASE_URL}/${regionKey}/${encodeURIComponent(regionVal.name)}`,
-      lastModified: LAST_MODIFIED_DATE,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    });
-
     for (const districtVal of Object.values(regionVal.districts)) {
       const districtName = districtVal.name;
 
@@ -168,5 +153,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...mainRoute, ...categoryRoutes, ...regionRoutes];
+  return [...mainRoute, ...singleRegionRoutes, ...regionRoutes];
 }

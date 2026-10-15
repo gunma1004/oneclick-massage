@@ -13,15 +13,15 @@ interface DongDetailClientProps {
 const initialShops = [
   {
     id: 1,
-    name: "바른안심테라피",
-    desc: "선입금 없는 100% 현장 후불제! 전문 테라피스트의 정성 어린 감성 바디 테라피",
+    name: "원클릭안심테라피",
+    desc: "서울 전체 마사지 추천 총정리! 숙련된 테라피스트의 정성 어린 스웨디시 및 아로마 테라피",
     phone: "0507-1280-3140",
-    price: "110,000원부터~",
+    price: "90,000원부터~",
     image: "/shop1.jpg",
   },
   {
     id: 2,
-    name: "오늘밤바른케어",
+    name: "오늘밤원클릭케어",
     desc: "최고급 천연 아로마 오일을 활용한 전신 이완 및 림프 순환 케어 전문 프로그램",
     phone: "0507-1280-3199",
     price: "60,000원부터~",
@@ -29,24 +29,24 @@ const initialShops = [
   },
   {
     id: 3,
-    name: "주주안심홈타이",
-    desc: "재방문율 높은 안심 케어! 철저한 위생 관리와 품격 있는 정통 타이 & 릴렉싱",
+    name: "주주원클릭홈타이",
+    desc: "재방문율 높은 제휴 샵! 철저한 위생 관리와 품격 있는 정통 타이 & 릴렉싱",
     phone: "0507-1280-3197",
     price: "60,000원부터~",
     image: "/shop3.jpg",
   },
   {
     id: 4,
-    name: "골든바른테라피",
-    desc: "전문 힐러진의 맞춤형 바디 관리, 시간대별 편안한 VIP 피로회복 솔루션",
+    name: "골든원클릭테라피",
+    desc: "전문 관리사들의 맞춤형 바디 관리, 시간대별 편안한 VIP 피로회복 솔루션",
     phone: "0507-1280-3360",
     price: "60,000원부터~",
     image: "/shop4.jpg",
   },
   {
     id: 5,
-    name: "퀸즈바른홈케어",
-    desc: "수도권 전지역 엄선된 파트너! 정직한 정찰제와 함께하는 프라이빗 힐링 테라피",
+    name: "퀸즈원클릭홈케어",
+    desc: "수도권 전지역 엄선된 파트너! 정직한 정찰제 코스와 함께하는 프라이빗 힐링 테라피",
     phone: "0507-1280-3296",
     price: "60,000원부터~",
     image: "/shop5.jpg",
@@ -63,7 +63,7 @@ export default function DongDetailClient({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // 🌟 클라이언트 마운트 후에만 안전하게 셔플을 실행하여 서버/클라이언트 불일치(#418) 차단
+    // 🌟 클라이언트 마운트 후에만 안전하게 셔플을 실행하여 서버/클라이언트 불일치 차단
     setMounted(true);
     const shuffled = [...initialShops];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -82,13 +82,13 @@ export default function DongDetailClient({
       {/* 1. 지역 디렉토리 안내 배너 */}
       <section className="bg-[#141418] border border-amber-500/30 rounded-3xl p-6 md:p-8 shadow-lg">
         <span className="text-amber-400 text-xs font-black tracking-widest uppercase mb-1 block">
-          {districtName} · {dongName} 100% 현장 후불 정찰제
+          {districtName} · {dongName} 마사지 큐레이션 안내
         </span>
         <h2 className="text-2xl md:text-3xl font-black text-white">
-          📍 {shortLocation} 선입금 없는 출장 안심 마사지
+          📍 {shortLocation} 마사지샵 추천 및 코스 안내
         </h2>
         <p className="text-xs md:text-sm text-gray-300 mt-2 leading-relaxed">
-          {fullLocation} 고객님을 위한 바른케어 안심 바디케어 디렉토리입니다. 예약 선입금 사기 걱정 없는 정찰제 요금표와 맞춤 코스를 확인하세요.
+          {fullLocation} 출장마사지·스웨디시 업체를 원클릭에서 확인하세요. 시·군·구별로 나눠 코스와 이용 요금, 운영 시간을 정리했습니다. 예약은 각 업체에 직접 하시면 됩니다.
         </p>
       </section>
 
@@ -96,9 +96,9 @@ export default function DongDetailClient({
       <section className="space-y-4">
         <div className="flex justify-between items-center">
           <h3 className="text-sm font-black text-amber-400 tracking-wider uppercase">
-            🏆 {shortLocation} 안심 후불 추천 제휴점
+            🏆 {shortLocation} 추천 제휴 마사지샵
           </h3>
-          <span className="text-[11px] text-gray-500">선입금 0원 정찰제 제휴 센터</span>
+          <span className="text-[11px] text-gray-500">원클릭마사지 제휴 센터</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -109,7 +109,7 @@ export default function DongDetailClient({
             >
               <img
                 src={shop.image}
-                alt={`${shortLocation} 출장 마사지 - ${shop.name}`}
+                alt={`${shortLocation} 마사지 - ${shop.name}`}
                 width={96}
                 height={96}
                 loading="lazy"
@@ -146,7 +146,7 @@ export default function DongDetailClient({
           href="/"
           className="text-xs bg-neutral-900 border border-white/10 px-4 py-2 rounded-xl text-gray-400 hover:text-amber-400 transition-colors"
         >
-          🏠 홈으로 돌아가기
+          🏠 전체 홈으로
         </Link>
         <Link
           href={`/${region}/${encodeURIComponent(districtName)}`}
